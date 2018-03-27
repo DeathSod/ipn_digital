@@ -27,22 +27,20 @@
 					</div>
 				</nav>
 			</header>
-			<section class="intro">
-				<div class="intro-text offset-md-1 col-10 text-center"><div>
-					<h1 class="">Buying and selling ads <br/><span>was never easier</span></h1>
-				</div>
+			<section class="intro text-center">
+				<h1 class="align-middle">Buying and selling ads <br/><span>was never easier</span></h1>
 			</section>	
 		</div>
 		<section class="container">
-			<div class="row justify-content-between">
+			<div class="info row justify-content-between">
 				<div class="util-ipn">
 					<img class="img-responsive" src="#" alt="">
 					<p><span class="font-weight-bold">Buy</span> ads</p>
 				</div>
 				<div class="util-ipn">
 					<figure class="figure">
-						<img class="figure-img img-fluid rounded" id="item-2" src="./img/sales.png" alt="">
-						<p class="text-center"><span class="font-weight-bold">Sell</span> spaces</span> to DFP</p>
+						<img class="figure-img img-fluid rounded" src="#" alt="">
+						<p class="text-center"><span class="font-weight-bold">Sell</span> spaces</span></p>
 					</figure>
 				</div>
 				<div class="util-ipn">
@@ -53,7 +51,7 @@
 				</div>
 				<div class="util-ipn">
 					<figure class="figure">
-						<img class="figure-img img-fluid rounded" src="./img/report.png" alt="">
+						<img class="figure-img img-fluid rounded" src="#" alt="">
 						<p class="text-center"><span class="font-weight-bold">Tailored</span> Reports</p>
 					</figure>
 				</div>
