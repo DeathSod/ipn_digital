@@ -31,7 +31,6 @@ html, body {
 }
 
 header {
-	position: fixed;
 	width: 100%;
 	box-shadow: 0px 3px 100px #000;
 	z-index: 1;
@@ -52,6 +51,10 @@ a.navbar-brand {
 
 .form-box {
 	margin-right: 2%;
+}
+
+.form-box-register {
+	margin-right: 7%;
 }
 
 .login-register {
@@ -75,11 +78,10 @@ header button {
 
 .intro {
 	background-image: url("../img/bg-image-2.jpg");
-	padding: 8em 0;
+	padding: 15px 0;
 	height: 100vh;
 	background-size: cover;
 	background-position: center;
-	font-family: "Indie Flower";
 	color: #b44a30;
 	font-size: 10px;
 }
@@ -103,19 +105,88 @@ header button {
 .intro h1 {
 	width: 95%;
 	font-size: 5em;
-	padding-top: 18vh;
-	padding-left: 8vw;
+	padding-left: 7vw;
 	margin: 0 auto;
 	position: absolute;
-	top: 0;
+	top: 115px;
 	font-weight: 600;
 	transform: rotate(7.5deg);
 	color: #888888;
+	font-family: "Indie Flower";
 }
 
 .intro h1 span{
 	
 	
+}
+
+/*Register Form section*/
+.bg-register {
+	background-image: url("../img/bg-image.jpg");
+}
+
+.register-section {
+	padding: 40px 0;
+	height:100%;
+	width: 100%;
+}
+
+.hr-register {
+	border-width: 5px;
+	width: 100%;
+	border-color:#000;
+	position: absolute;
+	bottom: 50vh;
+}
+
+.register-box {
+	margin-left: 50%;
+	transform: translateX(-50%);
+	height:100%;
+	width: 43%;
+	background-color: #fff;
+	border-radius: 20px;
+	border-style:solid;
+	border-color: #343a40;
+	border-width: 5px;
+	box-shadow: 0px 20px 100px #888888;
+	font-family: GO;
+	color: #343a40;
+}
+
+.register-box h1 {
+	padding-top:5%;
+	text-align: center;
+}
+
+.register-box p {
+	padding-top: 3%;
+	text-align: center;
+	font-size: 18px;
+	border-color: black;
+	border-width: 1px;
+	border-style: solid;
+	margin: 30px 10% 10px 10%;
+	padding: 10px 10px;
+	background-color: #343a40;
+	color:white;border-radius: 20px;
+	box-shadow: 0px 25px 100px #888888;
+}
+
+.register-box span {
+	font-style: italic; 
+	font-weight: 500;
+}
+
+.register-box form {
+	margin: 40px 20px;
+	font-size: 20px;
+}
+
+.register-box form button {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 25px;
 }
 
 /*Info section*/
@@ -133,7 +204,6 @@ header button {
 	margin-top: -30px;
 	width: 40%;
 	position: relative;
-	left: 24vw;
 	background-color: #000;
 	color: #fff;
 	border-style: solid;
@@ -164,7 +234,7 @@ header button {
 }
 
 .util-ipn {
-	padding: 2em 4em;
+	padding: 2em 5em;
 	font-family: "GO";
 	font-size: 18px;
 	font-style: italic;
@@ -194,28 +264,30 @@ header button {
 .links-container {
 	font-family: "GO";
 	color: #000;
-	padding: 30px 0 0 10vw;
+	padding: 20px 0 0 0;
 }
 
 #items-1st {
 	border-style: none none none solid;
 	border-width: 2px;
 	border-radius: 10px;
+	margin-left: 0;
 }
 
 #items-last {
 	border-style: none solid none none;
 	border-width: 2px;
 	border-radius: 10px;
+	margin-right: 0;
 }
 
 .links-section {
 	padding: 0 2vw;
-	margin: 0 10px 15px 10px;
+	margin: 0 12px 15px 12px;
 }
 
 .links-section p{
-	font-size: 25px;
+	font-size: 20px;
 	margin-bottom: 5px;
 	margin-top: 5px;
 }
@@ -238,7 +310,7 @@ header button {
 }
 
 .sn-container {
-	margin-top: 60px;
+	margin-top: 50px;
 	padding: 5px 20px;
 	border-style: none solid;
 	border-width: 2px;
@@ -284,4 +356,36 @@ footer button:hover {
 	padding-top: 8px;
 }
 
+.footer-div {
+	margin: 0;
+}
+
 /* @MEDIA */
+
+@media (max-width: 1095px) {
+	.util-ipn {
+		padding: 2em 3em;
+	}
+
+	.info-desc h2 {
+		font-size: 40px;
+	}
+
+}
+
+@media (max-width: 1350px) {
+
+	.links-container {
+		font-family: "GO";
+		color: #000;
+		padding: 38px 0 0 0;
+	}
+
+	.links-section p{
+		font-size: 15px;
+	}
+	
+	.links-section a{
+		font-size: 12px;
+	}
+}

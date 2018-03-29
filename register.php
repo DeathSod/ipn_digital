@@ -11,62 +11,71 @@
 		<link rel="stylesheet" href="css/stylesheet.css" type="text/css">
 	</head>
 	<body>
-		<div class="bg-init">
+		<div>
 			<header>
 				<nav class="navbar navbar-dark bg-dark navbar-fixed-top justify-content-between">
-					<a class="navbar-brand" href="#">IPN Digital</a>
-					<div class="form-box">
+					<a class="navbar-brand" href="./index.php">IPN Digital</a>
+					<div class="form-box-register">
 						<ul class="login-register row">
 							<form class="form-inline" action="#" method="POST" accept-charset="utf-8">
 								<li><input class="form-control form-control-sm" type="text" name="user" placeholder="Enter User or Email" required="true"></li>
 								<li><input class="form-control form-control-sm" type="password" name="password" placeholder=" Enter Password" required="true"></li>
 								<li><button class="btn btn-outline-light" type="submit">Log In</button></li>
 							</form>
-							<li><a href="./register.php"><button class="btn btn-outline-light">Register Now</button></a></li>
 						</ul>
 					</div>
 				</nav>
 			</header>
-			<section class="intro text-center">
-				<div>
-					<img class="" src="./img/cover-image-3.jpg" alt="">
-				</div>
-				<h1>Buying and selling ads <br/><span>has never been easier</span></h1>
-			</section>	
 		</div>
-		<div class="info-container">
-			<section>
-				<div class="info-desc">
-					<hr class="hr-info col-offset-1">
-					<h2 class="text-center offset-md-4 col-md-4">With us you can</h2>
+		<div class="bg-register">
+			<div class="register-section">
+				<!--<hr class="hr-register">-->
+				<div class="register-box">
+					<h1>
+						¡Welcome to IPN Digital!
+					</h1>
+					<p>
+						Please leave your information below and begin your journey into <span>advertising</span>
+					</p>
+					<form action="" method="POST" accept-charset="utf-8">
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="inputFirstName">First Name:</label>
+								<input type="text" id="inputFirstName" class="form-control" placeholder="Enter Your First Name">
+							</div>
+							<div class="form-group col-md-6">
+								<label for="inputLastName">Last Name:</label>
+								<input type="text" id="inputLastName" class="form-control" placeholder="Enter Your Last Name">	
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputPhone">Phone:</label>
+							<input type="text" id="inputPhone" class="form-control" placeholder="Enter Your Phone Here">
+						</div>
+						<div class="form-group">
+							<label for="inputEmail">Email:</label>
+							<input type="email" id="inputEmail" class="form-control" placeholder="Enter Your Email Here">
+							<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+						</div>
+						<div class="form-group">
+							<label for="inputPassword">Password:</label>
+							<input type="password" id="inputPassword" class="form-control" placeholder="Insert Your Password">
+							<small id="pwHelp" class="form-text text-muted">Be sure to store this password somewhere safe.</small>
+						</div>
+						<div class="form-group">
+							<label for="inputRPassword">Repeat Password:</label>
+							<input type="password" id="inputRPassword" class="form-control" placeholder="Repeat Your Password">
+						</div>
+						<div class="form-check text-center">
+					      <input class="form-check-input" type="checkbox" id="gridCheck">
+					      <label class="form-check-label" for="gridCheck">
+					        I've read the terms and conditions
+					      </label>
+					    </div>
+					    <button type="submit" class="btn btn-outline-dark offset-md-3 col-md-6">Sign in</button>
+					</form>
 				</div>
-				<div class="info row justify-content-between">
-					<div class="util-ipn">
-						<figure class="figure">
-							<img class="figure-img img-fluid rounded" src="./img/buy.svg" alt="">
-							<p class="text-center"><span class="font-weight-bold">Buy</span> ads</span></p>
-						</figure>
-					</div>
-					<div class="util-ipn">
-						<figure class="figure">
-							<img class="figure-img img-fluid rounded" src="./img/sell.svg" alt="">
-							<p class="text-center"><span class="font-weight-bold">Sell</span> spaces</span></p>
-						</figure>
-					</div>
-					<div class="util-ipn">
-						<figure class="figure">
-							<img class="figure-img img-fluid rounded" src="./img/dfp.png" alt="">
-							<p class="text-center"><span class="font-weight-bold">Connect</span> to DFP</p>
-						</figure>
-					</div>
-					<div class="util-ipn">
-						<figure class="figure">
-							<img class="figure-img img-fluid rounded" src="./img/report.svg" alt="">
-							<p class="text-center"><span class="font-weight-bold">Tailored</span> Reports</p>
-						</figure>
-					</div>
-				</div>
-			</section>	
+			</div>
 		</div>
 		<footer>
 			<div class="footer-info">
