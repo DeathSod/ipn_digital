@@ -1,7 +1,13 @@
+<?php
+	
+	session_start();
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>IPN Digital - Home Page</title>
+		<title>IPN Digital | Register Now</title>
 		<meta charset="utf-8">
 		<!--Bootstrap CSS-->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,42 +43,59 @@
 					<p>
 						Please leave your information below and begin your journey into <span>advertising</span>
 					</p>
-					<form action="" method="POST" accept-charset="utf-8">
+					<form action="./includes/userRegistry.php" method="POST" accept-charset="utf-8">
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="inputFirstName">First Name:</label>
-								<input type="text" id="inputFirstName" class="form-control" placeholder="Enter Your First Name">
+								<input type="text" id="inputFirstName" name="firstName" class="form-control" placeholder="Enter Your First Name" required>
 							</div>
 							<div class="form-group col-md-6">
 								<label for="inputLastName">Last Name:</label>
-								<input type="text" id="inputLastName" class="form-control" placeholder="Enter Your Last Name">	
+								<input type="text" id="inputLastName" name="lastName" class="form-control" placeholder="Enter Your Last Name" required>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="inputTypeUser">You're here as a:</label>
+								<select id="inputTypeUser" name="typeUser" class="form-control">
+									<option selected value="choose">Choose One...</option>
+									<option value="person">Person</option>
+									<option value="company">Company</option>
+									<option value="association">Association</option>
+								</select>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="inputPhone">Phone:</label>
+								<input type="text" id="inputPhone" name="phone" class="form-control" placeholder="Example: +584141234567" required>
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputPhone">Phone:</label>
-							<input type="text" id="inputPhone" class="form-control" placeholder="Enter Your Phone Here">
-						</div>
-						<div class="form-group">
 							<label for="inputEmail">Email:</label>
-							<input type="email" id="inputEmail" class="form-control" placeholder="Enter Your Email Here">
+							<input type="email" id="inputEmail" name="email" class="form-control" placeholder="Enter Your E-mail Here" required>
 							<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 						</div>
 						<div class="form-group">
+							<label for="inputUsername">Username:</label>
+							<input type="text" id="inputUsername" name="username" class="form-control" placeholder="Enter Your Username" required>
+							<small id="usernameHelp" class="form-text text-muted">This is what you'll use to log in.</small>
+						</div>
+						<div class="form-group">
 							<label for="inputPassword">Password:</label>
-							<input type="password" id="inputPassword" class="form-control" placeholder="Insert Your Password">
+							<input type="password" id="inputPassword" name="pwd" class="form-control" placeholder="Insert Your Password" required>
 							<small id="pwHelp" class="form-text text-muted">Be sure to store this password somewhere safe.</small>
 						</div>
 						<div class="form-group">
 							<label for="inputRPassword">Repeat Password:</label>
-							<input type="password" id="inputRPassword" class="form-control" placeholder="Repeat Your Password">
+							<input type="password" id="inputRPassword" name="repeatPwd" class="form-control" placeholder="Repeat Your Password" required>
+							<small id="pwdUnmachted"></small>
 						</div>
 						<div class="form-check text-center">
-					      <input class="form-check-input" type="checkbox" id="gridCheck">
+					      <input class="form-check-input" name="checkboxTC" type="checkbox" id="gridCheck" required>
 					      <label class="form-check-label" for="gridCheck">
 					        I've read the terms and conditions
 					      </label>
 					    </div>
-					    <button type="submit" class="btn btn-outline-dark offset-md-3 col-md-6">Sign in</button>
+					    <button type="submit" name="submit" class="btn btn-outline-dark offset-md-3 col-md-6">Sign in!</button>
 					</form>
 				</div>
 			</div>
@@ -132,6 +155,7 @@
 		<script src="js/popper.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/font-awesome.js"></script>
+		<script src="js/main.js"></script>
 		<!-- ****************************** -->
 	</body>
 </html>

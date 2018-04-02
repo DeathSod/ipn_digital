@@ -1,7 +1,13 @@
+<?php
+	
+	session_start();
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>IPN Digital - Home Page</title>
+		<title>IPN Digital | Home Page</title>
 		<meta charset="utf-8">
 		<!--Bootstrap CSS-->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,10 +23,10 @@
 					<a class="navbar-brand" href="#">IPN Digital</a>
 					<div class="form-box">
 						<ul class="login-register row">
-							<form class="form-inline" action="#" method="POST" accept-charset="utf-8">
+							<form class="form-inline" action="./includes/login.php" method="POST" accept-charset="utf-8">
 								<li><input class="form-control form-control-sm" type="text" name="user" placeholder="Enter User or Email" required="true"></li>
 								<li><input class="form-control form-control-sm" type="password" name="password" placeholder=" Enter Password" required="true"></li>
-								<li><button class="btn btn-outline-light" type="submit">Log In</button></li>
+								<li><button class="btn btn-outline-light" type="submit" name="login">Log In</button></li>
 							</form>
 							<li><a href="./register.php"><button class="btn btn-outline-light">Register Now</button></a></li>
 						</ul>
@@ -56,7 +62,7 @@
 					<div class="util-ipn">
 						<figure class="figure">
 							<img class="figure-img img-fluid rounded" src="./img/dfp.png" alt="">
-							<p class="text-center"><span class="font-weight-bold">Connect</span> to DFP</p>
+							<p class="text-center"><span class="font-weight-bold">Connect</span> to your DFP</p>
 						</figure>
 					</div>
 					<div class="util-ipn">

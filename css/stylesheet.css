@@ -103,16 +103,16 @@ header button {
 }
 
 .intro h1 {
-	width: 95%;
-	font-size: 5em;
-	padding-left: 7vw;
-	margin: 0 auto;
-	position: absolute;
-	top: 115px;
-	font-weight: 600;
-	transform: rotate(7.5deg);
 	color: #888888;
 	font-family: "Indie Flower";
+	font-size: 5em;
+	font-weight: 600;
+	margin: 0 auto;
+	padding-left: 7vw;
+	position: absolute;
+	top: 115px;
+	transform: rotate(7.5deg);
+	width: 95%;
 }
 
 .intro h1 span{
@@ -234,7 +234,9 @@ header button {
 }
 
 .util-ipn {
-	padding: 2em 5em;
+	height: 180px;
+	padding: 0 5em;
+	margin: 20px 0;
 	font-family: "GO";
 	font-size: 18px;
 	font-style: italic;
@@ -242,7 +244,7 @@ header button {
 
 .util-ipn img {
 	height: auto;
-	width: 7.5rem;
+	width: 9.5rem;
 	max-width: 100%;
 	padding: 0 10px;
 }
