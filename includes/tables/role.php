@@ -1,7 +1,5 @@
 <?php
 
-	include_once 'db_connection.php';
-
 	class Role extends IpnConnection{
 
 		private $name;
@@ -21,7 +19,7 @@
 		//Obtiene todos los roles de la BBDD
 		public function getAllRoles()
 		{
-			$sql = "SELECT * FROM Role";
+			$sql = "SELECT * FROM Role WHERE RO_ID > 1 ORDER BY RO_ID ASC";
 
 			$conn = $this->connect();
 			$stmt = $conn->prepare($sql);
@@ -31,7 +29,7 @@
 
 			$this->close_connect($conn);
 
-			//return $roles;
+			return $roles;
 		}
 
 		//Obitene el rol por el nombre al ser Unique

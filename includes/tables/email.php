@@ -1,7 +1,5 @@
 <?php
 
-	include_once 'db_connection.php';
-
 	class Email extends IpnConnection{
 
 		private $address;
@@ -66,6 +64,35 @@
 			//return $emails;
 		}
 
+		public function getEmailByUser($user)
+		{
+			$sql = "SELECT * FROM Email WHERE EM_FK_US = :User";
+
+			$conn = $this->connect();
+			$stmt = $conn->prepare($sql);
+			$stmt->execute(['User' => $user]);
+			$email = $stmt->fetch();
+
+			$this->close_connect($conn);
+
+			return $email;
+		}
+
+		public function getAllEmailsByAddress($address)
+		{
+			$sql = "SELECT * FROM Email WHERE EM_Address = :Address";
+
+			$conn = $this->connect();
+			$stmt = $conn->prepare($sql);
+			$stmt->execute(['Address' => $address]);
+
+			$rows = $stmt->fetchColumn();
+
+			$this->close_connect($conn);
+
+			return $rows;
+		}
+
 		//Obtener el Id del correo basado en la dirección
 		//Se usaría principalmente para el delete
 		public function getIdByAddress($address)
@@ -98,9 +125,15 @@
 			return $user;
 		}
 
-		public function updateEmail()
+		public function updateEmail($id, $column, $value)
 		{
+			$sql = "UPDATE Email SET ".$column."=:Value WHERE EM_FK_US=:Id";
 
+			$conn = $this->connect();
+			$stmt = $conn->prepare($sql);
+			$stmt->execute(['Value' => $value, 'Id' => $id]);
+
+			$this->close_connect($conn);
 		}
 
 		public function deleteEmail()

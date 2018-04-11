@@ -25,14 +25,14 @@ html, body {
 
 
 .bg-init {
+	box-shadow: 0 20px 100px #888888;
 	height: 100vh;
 	width: 100%;
-	box-shadow: 0px 20px 100px #888888;
 }
 
 header {
+	box-shadow: 0 3px 100px #000;
 	width: 100%;
-	box-shadow: 0px 3px 100px #000;
 	z-index: 1;
 }
 
@@ -42,11 +42,11 @@ header li {
 }
 
 a.navbar-brand {
+	border-right: dotted;
 	font-family: "GO";
 	font-size: 2em;
-	padding: 0 2em 0 0.5em;
 	margin-left: 5%;
-	border-right: dotted;
+	padding: 0 2em 0 0.5em;
 }
 
 .form-box {
@@ -58,8 +58,8 @@ a.navbar-brand {
 }
 
 .login-register {
-	padding: 0;
 	margin-bottom: 0;
+	padding: 0;
 }
 
 .login-register input {
@@ -69,28 +69,28 @@ a.navbar-brand {
 
 
 header button {
-	font-family: "GO";
-	border-width: 2.5px !important;
 	border-radius: 10px !important;
+	border-width: 2.5px !important;
+	font-family: "GO";
 }
 
 /*cover image section*/
 
 .intro {
 	background-image: url("../img/bg-image-2.jpg");
-	padding: 15px 0;
-	height: 100vh;
-	background-size: cover;
 	background-position: center;
+	background-size: cover;
 	color: #b44a30;
 	font-size: 10px;
+	height: 100vh;
+	padding: 15px 0;
 }
 
 .intro div {
-	height: 36rem;
-	width: 60rem;
-	margin: auto;
 	border-color: black;
+	height: 36rem;
+	margin: auto;
+	width: 60rem;
 }
 
 
@@ -125,18 +125,15 @@ header button {
 	background-image: url("../img/bg-image.jpg");
 }
 
+#regLayout 
+{
+	display: none;
+}
+
 .register-section {
 	padding: 40px 0;
 	height:100%;
 	width: 100%;
-}
-
-.hr-register {
-	border-width: 5px;
-	width: 100%;
-	border-color:#000;
-	position: absolute;
-	bottom: 50vh;
 }
 
 .register-box {
@@ -149,7 +146,7 @@ header button {
 	border-style:solid;
 	border-color: #343a40;
 	border-width: 5px;
-	box-shadow: 0px 20px 100px #888888;
+	box-shadow: 0 20px 100px #888888;
 	font-family: GO;
 	color: #343a40;
 }
@@ -159,34 +156,65 @@ header button {
 	text-align: center;
 }
 
-.register-box p {
-	padding-top: 3%;
-	text-align: center;
-	font-size: 18px;
+.register-box .form-header {
+	background-color: #343a40;
 	border-color: black;
-	border-width: 1px;
+	border-radius: 20px;
 	border-style: solid;
+	border-width: 1px;
+	box-shadow: 0 25px 100px #888888;
+	color:white;
+	font-size: 18px;
 	margin: 30px 10% 10px 10%;
 	padding: 10px 10px;
-	background-color: #343a40;
-	color:white;border-radius: 20px;
-	box-shadow: 0px 25px 100px #888888;
+	padding-top: 3%;
+	text-align: center;
 }
 
-.register-box span {
+.register-box .form-header span {
 	font-style: italic; 
 	font-weight: 500;
 }
 
 .register-box form {
-	margin: 40px 20px;
 	font-size: 20px;
+	margin: 40px 20px;
+}
+
+.warning-mssg {
+	color: red;
+	font-size: 15px;
+	margin-bottom: 0;
+	margin-top: 5px;
+}
+
+.requiredForm {
+	color: red;
 }
 
 .register-box form button {
-	margin-top: 10px;
-	margin-bottom: 10px;
 	font-size: 25px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+/* Companies section */
+
+.fig-companies {
+	border-color:#000;
+	border-style:solid;
+	border-width:3px;
+	transition: box-shadow 0.2s ease-in-out;
+	width: 219.27px;
+}
+
+.fig-companies:hover {
+	background-color: black;
+	box-shadow: 10px 10px 10px #888888;
+}
+
+.fig-companies:hover figcaption{
+	color: #fff;
 }
 
 /*Info section*/
@@ -378,8 +406,8 @@ footer button:hover {
 @media (max-width: 1350px) {
 
 	.links-container {
-		font-family: "GO";
 		color: #000;
+		font-family: "GO";
 		padding: 38px 0 0 0;
 	}
 

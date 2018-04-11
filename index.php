@@ -2,6 +2,11 @@
 	
 	session_start();
 
+	if(isset($_SESSION['logged_uid']))
+	{
+		header("Location: mainpage.php");
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +16,7 @@
 		<meta charset="utf-8">
 		<!--Bootstrap CSS-->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta http-equiv="x-ua-compatible" content="ie-edge">
+		<meta http-equiv="x-ua-compatible" content="IE=Edge">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 		<!-- *********** -->
 		<link rel="stylesheet" href="css/stylesheet.css" type="text/css">
@@ -24,7 +29,11 @@
 					<div class="form-box">
 						<ul class="login-register row">
 							<form class="form-inline" action="./includes/login.php" method="POST" accept-charset="utf-8">
-								<li><input class="form-control form-control-sm" type="text" name="user" placeholder="Enter User or Email" required="true"></li>
+								<li><div class="form-check">
+									<label class="form-check-label mr-2" for="rememberMe" style="color:#fff;font-family: 'GO'">Remember Me?</label>
+									<input class="form-check-input" type="checkbox" id="rememberMe" value="1">
+								</div></li>
+								<li><input class="form-control form-control-sm" type="text" name="user" placeholder="Enter Email" required="true"></li>
 								<li><input class="form-control form-control-sm" type="password" name="password" placeholder=" Enter Password" required="true"></li>
 								<li><button class="btn btn-outline-light" type="submit" name="login">Log In</button></li>
 							</form>

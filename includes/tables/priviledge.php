@@ -1,7 +1,5 @@
 <?php
 
-	include_once 'db_connection.php';
-
 	class Priviledge extends IpnConnection{
 
 		private $name;

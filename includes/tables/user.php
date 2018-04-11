@@ -1,14 +1,13 @@
 <?php
 
-	include_once 'db_connection.php';
-
 	class User extends IpnConnection{
 
 		private $name;
 		private $lname;
-		private $nick;
 		private $pwd;
-		private $typeUser;
+		private $cName;
+		private $website;
+		private $wArea;
 
 		//Getters & Setters
 
@@ -32,16 +31,6 @@
 			$this->lname = $lname;
 		}
 
-		public function getNick()
-		{
-			return $this->nick;
-		}
-
-		public function setNick($nick)
-		{
-			$this->nick = $nick;
-		}
-
 		public function getPwd()
 		{
 			return $this->pwd;
@@ -52,28 +41,67 @@
 			$this->pwd = $pwd;
 		}
 
-		public function getTypeUser()
+		public function getCoName()
 		{
-			return $this->typeUser;
+			return $this->cName;
 		}
 
-		public function setTypeUser($typeUser)
+		public function setCoName($cName)
 		{
-			$this->typeUser = $typeUser;
+			$this->cName = $cName;
+		}
+
+		public function getWebsite()
+		{
+			return $this->website;
+		}
+
+		public function setWebsite($website)
+		{
+			$this->website = $website;
+		}
+
+		public function getWorkArea()
+		{
+			return $this->wArea;
+		}
+
+		public function setWorkArea($wArea)
+		{
+			$this->wArea = $wArea;
 		}
 
 		//
 
 		//Inserta Usuario en la BBDD
-		public function insertUser($name, $lname, $nick, $pwd/*, $typeUser*/)
+		public function insertUserP($name, $lname, $pwd, $role, $place)
 		{
-			$sql = "INSERT INTO User (US_Nick, US_Password, US_Name, US_LastName, US_FK_RO/*, US_FK_TY*/) VALUES (:Username, :Password, :firstName, :lastName, 2/*, :TypeUser*/)";
+			$sql = "INSERT INTO User (US_NameContact, US_LastNameContact, US_Password, US_FK_RO, US_FK_PL) VALUES (:firstName, :lastName, :Password, :Role, :Place)";
 
 			$conn = $this->connect();
 			$stmt = $conn->prepare($sql);
-			$stmt->execute(['Username' => $nick, 'Password' => $pwd, 'firstName' => $name, 'lastName' => $lname/*, 'TypeUser' => $typeUser*/]);
+			$stmt->execute(['firstName' => $name, 'lastName' => $lname, 'Password' => $pwd, 'Role' => $role, 'Place' => $place]);
+
+			$id = $conn->lastInsertId();
 
 			$this->close_connect($conn);
+
+			return $id;
+		}
+
+		public function insertUserC($name, $lname, $pwd, $cName, $website, $wArea, $role, $place)
+		{
+			$sql = "INSERT INTO User (US_NameContact, US_LastNameContact, US_Password, USC_CompanyName, USC_Website, USC_WorkArea, US_FK_RO, US_FK_PL) VALUES (:firstName, :lastName, :Password, :Company, :Website, :Work, :Role, :Place)";
+
+			$conn = $this->connect();
+			$stmt = $conn->prepare($sql);
+			$stmt->execute(['firstName' => $name, 'lastName' => $lname, 'Password' => $pwd, 'Company' => $cName, 'Website' => $website, 'Work' => $wArea, 'Role' => $role, 'Place' => $place]);
+
+			$id = $conn->lastInsertId();
+
+			$this->close_connect($conn);
+
+			return $id;
 		}
 
 		//Obtiene todos los usuarios de la BBDD
@@ -98,18 +126,18 @@
 			//return $users
 		}
 
-		public function getAllUsersByType($typeUser)
+		public function getAllUsersByRole($role)
 		{
-			$sql = "SELECT * FROM User WHERE US_FK_TY = :TypeUser";
+			$sql = "SELECT * FROM User WHERE US_FK_RO = :Role";
 
 			$conn = $this->connect();
 			$stmt = $conn->prepare($sql);
-			$stmt->execute(['TypeUser' => $typeUser]);
+			$stmt->execute(['Role' => $role]);
 			$users = $stmt->fetchAll();
 
-			$this->close_connect($connect);
+			$this->close_connect($conn);
 
-			//return $users
+			return $users;
 		}
 
 		//** Obtener al usuario por sus atributos Unique **//
@@ -129,37 +157,7 @@
 			return $user;
 		}
 
-		//Obtiene un usuario por su nick al ser único
-		public function getUserByUsername($nick)
-		{
-			$sql = "SELECT * FROM User WHERE US_Nick = :Username";
-
-			$conn = $this->connect();
-			$stmt = $conn->prepare($sql);
-			$stmt->execute(['Username' => $nick]);
-			$user = $stmt->fetch();
-
-			$this->close_connect($conn);
-
-			return $user;
-		}
-
 		//** Obtener datos específicos del usuario basado en los atributos Unique **//
-
-		//Obtiene el Id de un usuario por su Username al ser único
-		public function getIdByUsername($nick)
-		{
-			$sql = "SELECT US_ID FROM User WHERE US_Nick = :Username";
-
-			$conn = $this->connect();
-			$stmt = $conn->prepare($sql);
-			$stmt->execute(['Username' => $nick]);
-			$user = $stmt->fetch()->US_ID;
-
-			$this->close_connect($conn);
-
-			return $user;
-		}
 
 		//Obtiene el password de un Usuario por su Id al ser PK
 		public function getPasswordById($id)
@@ -176,31 +174,44 @@
 			return $user;
 		}
 
-		//Obtiene el password de un Usuario por su Username al ser Unique
-		public function getPasswordByUsername($nick)
+		public function getUsersWebsite($website)
 		{
-			$sql = "SELECT US_Password FROM User WHERE US_Nick = :Username";
+			$sql = "SELECT * FROM User WHERE USC_Website = :Website";
 
 			$conn = $this->connect();
 			$stmt = $conn->prepare($sql);
-			$stmt->execute(['Username' => $nick]);
-			$user = $stmt->fetch();
+			$stmt->execute(['Website' => $website]);
+
+			$rows = $stmt->fetchColumn();
 
 			$this->close_connect($conn);
 
-			return $user;
+			return $rows;
 		}
 
 		//Actualiza los datos de un usuario
-		public function updateUser()
+		public function updateUser($id, $column, $value)
 		{
+			$sql = "UPDATE User SET ".$column."=:Value WHERE US_ID=:Id";
+
+			$conn = $this->connect();
+			$stmt = $conn->prepare($sql);
+			$stmt->execute(['Value' => $value, 'Id' => $id]);
+
+			$this->close_connect($conn);
 
 		}
 
 		//Elimina un usuario de la BBDD
-		public function deleteUser()
+		public function deleteUser($id)
 		{
+			$sql = "DELETE FROM User Where US_ID=:Id";
 
+			$conn = $this->connect();
+			$stmt = $conn->prepare($sql);
+			$stmt->execute(['Id' => $id]);
+
+			$this-close_connect($conn);
 		}
 
 	}
