@@ -252,7 +252,7 @@ header button {
 	border-color: #000;
 	position: absolute;
 	z-index: -1;
-	box-shadow: 0px 20px 100px #888888;
+	box-shadow: 0 20px 100px #888888;
 }
 
 .info {
@@ -277,14 +277,30 @@ header button {
 	padding: 0 10px;
 }
 
+.check-sizes {
+	transition: box-shadow 0.5s;
+}
+
+.check-sizes:hover {
+	box-shadow: 10px 10px 20px #888;
+}
+
+.check-sizes:focus {
+	outline: hidden;
+}
+
+#inputCampaignDateStart, #inputCampaignDateEnd, #inputCpm {
+	font-size: 12px;
+}
+
 /* Footer */
 
 .footer-info {
-	height: 220px;
 	background-color: #b44a30;
+	border-color: #000;
 	border-style: none none solid none;
 	border-width: 3px;
-	border-color: #000;
+	height: 220px;
 }
 
 .footer-info .container {
