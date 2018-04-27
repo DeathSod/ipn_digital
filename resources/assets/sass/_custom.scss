@@ -1,0 +1,247 @@
+@font-face {
+	font-family: "GO";
+	src: url("../fonts/GermaniaOne-Regular.ttf");
+}
+
+$navbar-height: 62px;
+$jumbotron-bg: #e9ecef;
+$padding-info-caption: 2rem;
+$padding-info-hr: $padding-info-caption*0.625;
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.bg-init {
+	box-shadow: 0 20px 100px #888888;
+    width: 100%;
+    
+    header {
+        box-shadow: 0 3px 100px #000;
+        width: 100%;
+        z-index: 1;
+
+        li {
+            list-style: none;
+            padding: 0 0.5em;
+        }
+
+        a.navbar-brand {
+            border-right: dotted;
+            font-family: "GO";
+            font-size: 2em;
+            margin-left: 5%;
+            padding: 0 2em 0 0.5em;
+        }
+
+        .form-box {
+            margin-right: 2%;
+
+            .login-register {
+                margin-bottom: 0;
+                padding: 0;
+
+                input {
+                    font-family: "GO";
+	                font-size: 15px;
+                }
+            }
+
+        }
+
+        button {
+            border-radius: 10px !important;
+            border-width: 2.5px !important;
+            font-family: "GO";
+        }
+
+    }
+
+}
+
+.jumbotron {
+    margin-bottom: 0 !important;
+}
+
+.jumbotron-index {
+    margin-top: $navbar-height;
+}
+
+.info-container {
+    font-family: "GO";
+    background-color: $jumbotron-bg;
+    position: relative;
+    
+    .info-desc {
+        padding-top: $padding-info-caption;
+
+        h2 {
+            padding: 0 0.5em; 
+            margin-top: -30px;
+            width: 40%;
+            position: relative;
+            background-color: #000;
+            color: #fff;
+            border-style: solid;
+            border-width: 3px;
+            border-color: #000;
+            border-radius: 10px;
+            box-shadow: 0 0 200px #444444;
+            font-size: 50px;
+            font-weight: 700;
+        }
+
+        .hr-info {
+            width: 100%;
+            border-width: 3px;
+            height: 1px;
+            top: $padding-info-hr;
+            border-color: #000;
+            position: absolute;
+            z-index: 0;
+            box-shadow: 0 20px 100px #888888;
+        }
+
+    }
+
+    .info {
+        margin: 30px 0 0 0;
+        padding: 0 0 60px 0;
+        height: 230px;
+
+        .util-ipn {
+            height: 180px;
+            padding: 0;
+            margin: 20px 0;
+            font-family: "GO";
+            font-size: 18px;
+            font-style: italic;
+
+            img {
+                height: auto;
+                width: 9.5rem;
+                max-width: 100%;
+                padding: 0;
+                margin-bottom: 8%;
+            }
+        }
+    }
+
+}
+
+.footer-info {
+	background-color: $jumbotron-bg;
+	border-style: none none solid none;
+	border-width: 3px;
+    height: auto;
+
+    .footer-div {
+        margin: 0;
+
+        .links-container {
+            font-family: "GO";
+            color: #000;
+            padding: 20px 0 0 0;
+            margin-bottom: 20px;
+
+            .links-section {
+                
+                padding: 0 1%;
+	            margin: 0 0 15px 0;
+                
+                p{
+                    font-size: 20px;
+                    margin-bottom: 5px;
+                    margin-top: 5px;
+                }
+
+                a{
+                    color: #000;
+                    text-decoration: none;
+                    
+                    &:hover {
+                        color: #555;
+                    }
+                }
+
+                ul{
+                    list-style: none;
+                    padding-left: 0;
+                }
+            }
+
+            #items-1st {
+                border-style: none none none solid;
+                border-width: 2px;
+                border-radius: 10px;
+                margin-left: 0;
+            }
+            
+            #items-last {
+                border-style: none solid none none;
+                border-width: 2px;
+                border-radius: 10px;
+                margin-right: 0;
+            }
+
+        }
+
+        .sn-container {
+            margin-top: 50px;
+            padding: 5px 20px;
+            border-style: none solid;
+            border-width: 2px;
+            border-radius: 10px;
+            border-color: #000;
+
+            .sn-info {
+                color: #000;
+                padding-bottom: 5px;
+                font-family: "GO";
+                font-size: 40px;
+            }
+
+            button {
+                height: 50px;
+                width: 50px;
+                margin: auto 5px;
+                border-radius: 100%;
+                background-color: transparent;
+                border-color: black;
+                transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+                cursor: pointer;
+                outline: none;
+
+                &:hover {
+                    color: #fff;
+	                background-color: #000;
+                }
+            }
+
+            .icon {
+                font-size: 22px;
+            }
+
+        }
+        
+    }
+}
+
+.footer-bottom {
+	height: 50px;
+    background-color: $jumbotron-bg;
+    
+    p{
+        font-family: "GO";
+        color: #000;
+        font-size: 25px;
+        margin: 0;
+        padding-top: 8px;
+    }
+}
