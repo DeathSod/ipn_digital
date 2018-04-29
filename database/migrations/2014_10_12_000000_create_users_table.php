@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('US_id');
             $table->string('US_Email')->unique();
             $table->string('US_Password');
-            $table->decimal('US_Credits', 8, 2);
+            $table->decimal('US_Credits', 8, 2)->default(0);
             $table->boolean('US_isAdmin')->default(0);
             $table->boolean('US_isCompany');
             $table->rememberToken();

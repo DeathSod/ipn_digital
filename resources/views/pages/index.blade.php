@@ -4,7 +4,7 @@
     <title>{{config('app.name', 'IPN Digital')}} | Welcome!</title>
 @endsection
 
-@section('nav-layout')
+{{-- @section('nav-layout')
     <div class="form-box">
         <ul class="login-register row">
             <form class="form-inline" action="./includes/login.php" method="POST" accept-charset="utf-8">
@@ -20,17 +20,19 @@
             <li><a href="/register"><button class="btn btn-outline-light">Register Now</button></a></li>
         </ul>
     </div>
-@endsection
+@endsection --}}
 
 @section('content')
-    <div class="jumbotron jumbotron-fluid jumbotron-index">
-        <div class="container text-center">
-            <h1 class="display-4">Hello, world!</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-            <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a class="btn btn-success btn-lg" href="/login" role="button">Login</a>
-            <a class="btn btn-outline-primary btn-lg" href="/register" role="button">Register</a>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container-fluid text-center">
+            <h1 class="display-4 mb-4">Buying and selling ads has never been easier!</h1>
+            <p class="lead">Take your business to the next level with us</p>
+            <hr class="my-4 container">
+            <h5 class="display-5">To use our services please click one of the following buttons:</h5>
+            <div class="mt-4">
+                <a class="btn btn-success btn-lg" href="/login" role="button">Login</a>
+                <a class="btn btn-outline-primary btn-lg" href="/register" role="button">Register</a>
+            </div>
         </div>
     </div>
     <div class="info-container">
@@ -67,4 +69,8 @@
             </div>
         </section>	
     </div>
+@endsection
+
+@section('footer')
+    @include("../layouts/footer")
 @endsection

@@ -13677,7 +13677,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(11);
-module.exports = __webpack_require__(37);
+module.exports = __webpack_require__(38);
 
 
 /***/ }),
@@ -13693,6 +13693,7 @@ module.exports = __webpack_require__(37);
 
 __webpack_require__(12);
 __webpack_require__(36);
+__webpack_require__(37);
 
 //window.Vue = require('vue');
 
@@ -35930,6 +35931,44 @@ module.exports = function spread(callback) {
 
 /***/ }),
 /* 37 */
+/***/ (function(module, exports) {
+
+var buttonPerson = document.querySelector("#personForm");
+var buttonCompany = document.querySelector("#companyForm");
+var formPerson = document.querySelector('#personLayout');
+var formCompany = document.querySelector('#companyLayout');
+
+buttonPerson.addEventListener('click', function () {
+    if (!buttonPerson.classList.contains('btn-primary')) {
+        buttonCompany.classList.toggle('btn-primary');
+        buttonPerson.classList.toggle('btn-primary');
+        buttonPerson.style.transition = "all .6s ease-in-out";
+        formPerson.classList.toggle('d-none');
+        formCompany.classList.toggle('d-none');
+    }
+});
+
+buttonCompany.addEventListener('click', function () {
+    if (!buttonCompany.classList.contains('btn-primary')) {
+        buttonCompany.classList.toggle('btn-primary');
+        buttonCompany.style.transition = "all .6s ease-in-out";
+        buttonPerson.classList.toggle('btn-primary');
+        formPerson.classList.toggle('d-none');
+        formCompany.classList.toggle('d-none');
+    }
+});
+
+// Array.from(buttonForm).forEach(button => {
+//     button.addEventListener('click', () => {
+//         Array.from(buttonForm).forEach(btn => {
+//             btn.classList.toggle('btn-primary', false);
+//         });
+//         button.classList.toggle('btn-primary');
+//     });
+// });
+
+/***/ }),
+/* 38 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

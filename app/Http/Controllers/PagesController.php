@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Places;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -15,7 +16,14 @@ class PagesController extends Controller
 
     public function register()
     {
-        return view('pages.register');
+        $places = Places::all();
+
+        return view('pages.register')->with('places', $places);
+    }
+
+    public function login()
+    {
+        return view('pages.login');
     }
 
 }
