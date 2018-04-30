@@ -17,24 +17,25 @@ body {
 
 .bg-init {
   height: 62px;
-  -webkit-box-shadow: 0 20px 100px #888888;
-          box-shadow: 0 20px 100px #888888;
   width: 100%;
 }
 
 .bg-init header {
-  -webkit-box-shadow: 0 3px 100px #000;
-          box-shadow: 0 3px 100px #000;
   width: 100%;
   z-index: 1;
 }
 
-.bg-init header li {
+.bg-init header nav {
+  -webkit-box-shadow: 0 20px 100px #888888;
+          box-shadow: 0 20px 100px #888888;
+}
+
+.bg-init header nav li {
   list-style: none;
   padding: 0 0.5em;
 }
 
-.bg-init header a.navbar-brand {
+.bg-init header nav a.navbar-brand {
   border-right: dotted;
   font-family: "GO";
   font-size: 2em;
@@ -42,21 +43,21 @@ body {
   padding: 0 2em 0 0.5em;
 }
 
-.bg-init header .form-box {
+.bg-init header nav .form-box {
   margin-right: 2%;
 }
 
-.bg-init header .form-box .login-register {
+.bg-init header nav .form-box .login-register {
   margin-bottom: 0;
   padding: 0;
 }
 
-.bg-init header .form-box .login-register input {
+.bg-init header nav .form-box .login-register input {
   font-family: "GO";
   font-size: 15px;
 }
 
-.bg-init header button {
+.bg-init header nav button {
   border-radius: 10px !important;
   border-width: 2.5px !important;
   font-family: "GO";

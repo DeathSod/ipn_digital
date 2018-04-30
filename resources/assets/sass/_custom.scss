@@ -22,46 +22,49 @@ html, body {
 
 .bg-init {
     height: $navbar-height;
-	box-shadow: 0 20px 100px #888888;
     width: 100%;
     
     header {
-        box-shadow: 0 3px 100px #000;
         width: 100%;
         z-index: 1;
 
-        li {
-            list-style: none;
-            padding: 0 0.5em;
-        }
+        nav {
 
-        a.navbar-brand {
-            border-right: dotted;
-            font-family: "GO";
-            font-size: 2em;
-            margin-left: 5%;
-            padding: 0 2em 0 0.5em;
-        }
+            box-shadow: 0 20px 100px #888888;
 
-        .form-box {
-            margin-right: 2%;
-
-            .login-register {
-                margin-bottom: 0;
-                padding: 0;
-
-                input {
-                    font-family: "GO";
-	                font-size: 15px;
-                }
+            li {
+                list-style: none;
+                padding: 0 0.5em;
             }
 
-        }
+            a.navbar-brand {
+                border-right: dotted;
+                font-family: "GO";
+                font-size: 2em;
+                margin-left: 5%;
+                padding: 0 2em 0 0.5em;
+            }
 
-        button {
-            border-radius: 10px !important;
-            border-width: 2.5px !important;
-            font-family: "GO";
+            .form-box {
+                margin-right: 2%;
+
+                .login-register {
+                    margin-bottom: 0;
+                    padding: 0;
+
+                    input {
+                        font-family: "GO";
+                        font-size: 15px;
+                    }
+                }
+
+            }
+
+            button {
+                border-radius: 10px !important;
+                border-width: 2.5px !important;
+                font-family: "GO";
+            }
         }
 
     }
@@ -92,6 +95,7 @@ html, body {
 }
 
 .login-body {
+    
     display: -ms-flexbox;
     display: -webkit-box;
     display: flex;

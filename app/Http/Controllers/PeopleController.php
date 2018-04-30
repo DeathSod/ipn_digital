@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\People;
 use App\Places;
 use App\User;
 use Illuminate\Http\Request;
-use TheSeer\Tokenizer\Exception;
 use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\MassAssignmentException;
+use Illuminate\Support\Facades\App;
+use League\Flysystem\Exception;
 
 class PeopleController extends Controller
 {
@@ -29,9 +32,10 @@ class PeopleController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        //dd(request()->all());
-        $message = 'There was an error, try again';
+        $user = new User;
+        $people = new People;
+        
+        $message = "";
         $places = Places::all();
         $data = [
             'name' => request('firstName'),
@@ -40,52 +44,57 @@ class PeopleController extends Controller
             'email' => request('email')
         ];
 
+        DB::beginTransaction();
         try
         {
-            if(request('checkboxTC_P') == 'on')
-            {
-                $user = new User;
-                $people = new People;
+            $this->validate(request(), [
+                'firstName' => 'required|regex:/^([a-zA-Z áéíóúÁÉÍÓÚñÑ])*$/',
+                'lastName' => 'required|regex:/^([a-zA-Z áéíóúÁÉÍÓÚñÑ])*$/',
+                'email' => 'required|email|unique:users,US_Email',
+                'country' => 'exists:places,PL_Name',
+                'password' => 'required|same:repeatPassword',
+                'repeatPassword' => 'required',
+                'termsAndConditions' => 'accepted'
+            ]);
+            $user = User::create([
+                'US_Email' => request('email'),
+                'US_Password' => bcrypt(request('password')),
+                'US_isCompany' => 0
+            ]);
 
-                //User
-                $user->US_Email = request('email');
-                $user->US_Password = request('pwd');
-                $user->US_isCompany = 0;
-                $repeatPassword = request('repeatPwd');
+            $people = People::create([
+                'PE_Name' => request('firstName'),
+                'PE_LastName' => request('lastName'),
+                'PE_FK_US' => $user->id,
+                'PE_FK_PL' => Places::where('PL_Name', request('country'))->first()->PL_id
+            ]);
 
-                if($user->save())
-                {
-                    $people->PE_Name = request('firstName');
-                    $people->PE_LastName = request('lastName');
-                    $people->PE_FK_US = $user->id;
-                    $people->PE_FK_PL = Places::where('PL_Name', request('country'))->first()->PL_id;
+            DB::commit();
 
-                    if($people->save())
-                    {
-                        return view('pages.register')->with(['places' => $places]);
-                    }
-                }
-            }
-            else {
-                $message = "You need to agree with our terms and conditions in order to register an account";
-                return view('pages.register')->with(['error' => $message, 'places' => $places]);
-            }
+            $message = "<strong>Congratulations!</strong> You can now <a href='/login'>log in</a>";
+            return redirect()->back()->with(['success' => $message, 'places' => $places]);
+
         }
-        catch(QueryException $e) {
-            if($e->errorInfo[1] == 1062)
+        catch(QueryException $qe)
+        {
+
+            if($qe->errorInfo[1] == 1062)
             {
                 $message = 'This email already exists. Try with a different one';
             }
-            elseif($e->errorInfo[1] == 1048)
+            elseif($qe->errorInfo[1] == 1048)
             {
                 $message = "You can't leave empty fields.";
             }
+            DB::rollBack();
             return view('pages.register')->with(['error' => $message, 'places' => $places, 'data' => [$data]]);
         }
-
-        //People
-
-        //return redirect("/register");
+        catch(Exception $e)
+        {
+            DB::rollBack();
+            $message = "Something went wrong. Try again.";
+            return view("pages.register")->with(["error" => $message, "places" => $places, "data" => [$data]]);
+        }
     }
 
     /**

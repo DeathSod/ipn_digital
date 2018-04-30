@@ -18,13 +18,22 @@
                 <button id="companyForm" class="btn btn-form col-md-2 m-0">Company</button>
             </p>
             <div class="container">
-                @if( isset($error) )
-                    <div class="alert alert-danger text-center" role="alert">
-                        {{$error}}
+                @if( $errors->any() )
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <p><strong>The following error(s) have ocurred:</strong></p>
+                        @foreach($errors->all() as $err)
+                            <p>{{ $err }}</p>
+                        @endforeach
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                @elseif( isset($success))
-                    <div class="alert alert-success text-center" role="alert">
-                        {{$success}}
+                @elseif(session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                        {!! session()->get('success') !!}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 @endif
                 <form method="POST" action="/people">
@@ -82,17 +91,17 @@
 
                         <div class="form-group">
                             <label for="inputPassword">Password: <span class="requiredForm">*</span></label>
-                            <input type="password" id="inputPassword" name="pwd" class="form-control" placeholder="Insert Your Password">
+                            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Insert Your Password">
                         </div>
 
                         <div class="form-group">
                             <label for="inputRPassword">Repeat Password: <span class="requiredForm">*</span></label>
-                            <input type="password" id="inputRPassword" name="repeatPwd" class="form-control" placeholder="Repeat Your Password">
+                            <input type="password" id="inputRPassword" name="repeatPassword" class="form-control" placeholder="Repeat Your Password">
                         </div>
 
                         <div class="form-group">
-                            <p class="text-center"><input class="form-check-input" name="checkboxTC_P" type="checkbox" id="gridCheck">
-                            <label class="form-check-label " for="gridCheck">
+                            <p class="text-center col"><input class="form-check-input" name="termsAndConditions" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
                             I've read the terms and conditions
                             </label></p>
                         </div>
@@ -124,19 +133,19 @@
 
                         <div class="form-row">
                             <div class="form-group col">
-                                <label for="inputFirstNameC">First Name: <span class="requiredForm">*</span></label>
-                                <input type="text" id="inputFirstNameC" name="firstNameC" class="form-control" placeholder="Enter Your First Name">
+                                <label for="inputFirstNameC">Contact's First Name: <span class="requiredForm">*</span></label>
+                                <input type="text" id="inputFirstNameC" name="firstNameContact" class="form-control" placeholder="Enter Your First Name">
                             </div>
 
                             <div class="form-group col">
-                                <label for="inputLastNameC">Last Name: <span class="requiredForm">*</span></label>
-                                <input type="text" id="inputLastNameC" name="lastNameC" class="form-control" placeholder="Enter Your Last Name">
+                                <label for="inputLastNameC">Contact's Last Name: <span class="requiredForm">*</span></label>
+                                <input type="text" id="inputLastNameC" name="lastNameContact" class="form-control" placeholder="Enter Your Last Name">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="inputCountryC">Country: <span class="requiredForm">*</span></label>
-                            <select id="inputCountryC" name="countryC" class="form-control">
+                            <select id="inputCountryC" name="country" class="form-control">
                                 <option selected value="choose">Choose One...</option>
                                 @foreach($places as $place)
                                     <option> {{ $place->PL_Name }} </option>
@@ -146,29 +155,29 @@
 
                         <div class="form-group">
                             <label for="inputEmailC">Email: <span class="requiredForm">*</span></label>
-                            <input type="text" id="inputEmailC" name="emailC" class="form-control" placeholder="Enter Your E-mail Here">
+                            <input type="text" id="inputEmailC" name="email" class="form-control" placeholder="Enter Your E-mail Here">
                         </div>
 
                         <div class="form-group">
                             <label for="inputPasswordC">Password: <span class="requiredForm">*</span></label>
-                            <input type="password" id="inputPasswordC" name="pwdC" class="form-control" placeholder="Insert Your Password">
+                            <input type="password" id="inputPasswordC" name="password" class="form-control" placeholder="Insert Your Password">
                         </div>
 
                         <div class="form-group">
                             <label for="inputRPasswordC">Repeat Password: <span class="requiredForm">*</span></label>
-                            <input type="password" id="inputRPasswordC" name="repeatPwdC" class="form-control" placeholder="Repeat Your Password">
+                            <input type="password" id="inputRPasswordC" name="repeatPassword" class="form-control" placeholder="Repeat Your Password">
                         </div>
 
                         <div class="form-group">
                             <p class="text-center">
-                                <input class="form-check-input" name="checkboxTC_C" type="checkbox" id="gridCheckC">
+                                <input class="form-check-input" name="termsAndConditions" type="checkbox" id="gridCheckC">
                                 <label class="form-check-label" for="gridCheckC">
                                 I've read the terms and conditions
                                 </label>
                             </p>
                         </div>
 
-                        <p class="text-center"><button type="submit" name="submitC" class="btn btn-outline-dark col-md-6">Sign in!</button></p>
+                        <p class="text-center"><button type="submit" name="submit" class="btn btn-outline-dark col-md-6">Sign in!</button></p>
                     </div>
                 </form>
             </div>

@@ -35938,25 +35938,27 @@ var buttonCompany = document.querySelector("#companyForm");
 var formPerson = document.querySelector('#personLayout');
 var formCompany = document.querySelector('#companyLayout');
 
-buttonPerson.addEventListener('click', function () {
-    if (!buttonPerson.classList.contains('btn-primary')) {
-        buttonCompany.classList.toggle('btn-primary');
-        buttonPerson.classList.toggle('btn-primary');
-        buttonPerson.style.transition = "all .6s ease-in-out";
-        formPerson.classList.toggle('d-none');
-        formCompany.classList.toggle('d-none');
-    }
-});
+if (!!buttonPerson || !!buttonCompany) {
+    buttonPerson.addEventListener('click', function () {
+        if (!buttonPerson.classList.contains('btn-primary')) {
+            buttonCompany.classList.toggle('btn-primary');
+            buttonPerson.classList.toggle('btn-primary');
+            buttonPerson.style.transition = "all .6s ease-in-out";
+            formPerson.classList.toggle('d-none');
+            formCompany.classList.toggle('d-none');
+        }
+    });
 
-buttonCompany.addEventListener('click', function () {
-    if (!buttonCompany.classList.contains('btn-primary')) {
-        buttonCompany.classList.toggle('btn-primary');
-        buttonCompany.style.transition = "all .6s ease-in-out";
-        buttonPerson.classList.toggle('btn-primary');
-        formPerson.classList.toggle('d-none');
-        formCompany.classList.toggle('d-none');
-    }
-});
+    buttonCompany.addEventListener('click', function () {
+        if (!buttonCompany.classList.contains('btn-primary')) {
+            buttonCompany.classList.toggle('btn-primary');
+            buttonCompany.style.transition = "all .6s ease-in-out";
+            buttonPerson.classList.toggle('btn-primary');
+            formPerson.classList.toggle('d-none');
+            formCompany.classList.toggle('d-none');
+        }
+    });
+}
 
 // Array.from(buttonForm).forEach(button => {
 //     button.addEventListener('click', () => {
