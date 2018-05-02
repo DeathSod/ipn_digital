@@ -68,15 +68,15 @@ class CompaniesController extends Controller
                 'firstNameContact' => 'required|regex:/^([a-zA-Z áéíóúÁÉÍÓÚñÑ])*$/',
                 'lastNameContact' => 'required|regex:/^([a-zA-Z áéíóúÁÉÍÓÚñÑ])*$/',
                 'country' => 'exists:places,PL_Name',
-                'email' => 'required|email|unique:users,US_Email',
-                'password' => 'required|same:repeatPassword',
-                'repeatPassword' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|confirmed|min:8',
+                'password_confirmation' => 'required',
                 'termsAndConditions' => 'accepted'
             ]);
 
             $user = User::create([
-                'US_Email' => request('email'),
-                'US_Password' => bcrypt(request('password')),
+                'email' => request('email'),
+                'password' => bcrypt(request('password')),
                 'US_isCompany' => 0
             ]);
 

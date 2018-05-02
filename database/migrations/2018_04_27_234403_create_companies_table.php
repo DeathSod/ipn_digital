@@ -21,7 +21,7 @@ class CreateCompaniesTable extends Migration
             $table->text('CO_Website');
             $table->string('CO_WorkArea');
             $table->unsignedInteger('CO_FK_US');
-            $table->foreign('CO_FK_US')->references('US_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('CO_FK_US')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

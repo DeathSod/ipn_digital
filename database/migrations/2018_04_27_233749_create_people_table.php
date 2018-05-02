@@ -18,7 +18,7 @@ class CreatePeopleTable extends Migration
             $table->string('PE_Name');
             $table->string('PE_LastName');
             $table->unsignedInteger('PE_FK_US');
-            $table->foreign('PE_FK_US')->references('US_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('PE_FK_US')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

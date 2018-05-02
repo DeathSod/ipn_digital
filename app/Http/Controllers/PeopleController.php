@@ -44,21 +44,23 @@ class PeopleController extends Controller
             'email' => request('email')
         ];
 
+        dd($data);
         DB::beginTransaction();
         try
         {
             $this->validate(request(), [
                 'firstName' => 'required|regex:/^([a-zA-Z áéíóúÁÉÍÓÚñÑ])*$/',
                 'lastName' => 'required|regex:/^([a-zA-Z áéíóúÁÉÍÓÚñÑ])*$/',
-                'email' => 'required|email|unique:users,US_Email',
+                'email' => 'required|email|unique:users,email',
                 'country' => 'exists:places,PL_Name',
-                'password' => 'required|same:repeatPassword',
-                'repeatPassword' => 'required',
+                'password' => 'required|confirmed|min:8',
+                'password_confirmation' => 'required',
                 'termsAndConditions' => 'accepted'
             ]);
+
             $user = User::create([
-                'US_Email' => request('email'),
-                'US_Password' => bcrypt(request('password')),
+                'email' => request('email'),
+                'password' => bcrypt(request('password')),
                 'US_isCompany' => 0
             ]);
 

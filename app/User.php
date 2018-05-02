@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'US_Email', 'US_Password', 'US_Credits', 'US_isCompany'
+        'email', 'password', 'US_Credits', 'US_isCompany'
     ];
 
     /**
@@ -27,9 +27,20 @@ class User extends Authenticatable
         'US_Password', 'US_isAdmin', 'remember_token'
     ];
 
+    
     public function isAdmin()
     {
         return $this->isAdmin === 1;
+    }
+
+    public function people()
+    {
+        return $this->hasOne('\App\People', 'PE_FK_US');
+    }
+
+    public function companies()
+    {
+        return $this->hasOne('\App\Companies', 'CO_FK_US');
     }
 
 }

@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
 @section('title')
-    <title>{{config('app.name', 'IPN Digital')}} | Welcome!</title>
+    @guest
+        <title>{{config('app.name', 'IPN Digital')}} | Welcome!</title>
+    @else
+        <title>{{config('app.name', 'IPN Digital')}} | Dashboard</title>
+    @endguest
+@endsection
+
+@section('navbar')
+    @include('../layouts/nav')
 @endsection
 
 {{-- @section('nav-layout')
@@ -23,7 +31,7 @@
 @endsection --}}
 
 @section('content')
-    <div class="jumbotron jumbotron-fluid">
+    <div class="jumbotron jumbotron-fluid mt-5">
         <div class="container-fluid text-center">
             <h1 class="display-4 mb-4">Buying and selling ads has never been easier!</h1>
             <p class="lead">Take your business to the next level with us</p>

@@ -12,8 +12,10 @@
 */
 
 Route::get('/', 'PagesController@index');
-Route::get('/register', 'PagesController@register');
-Route::get('/login', 'PagesController@login');
-
 Route::post('/people', 'PeopleController@store');
 Route::post('/companies', 'CompaniesController@store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/settings', 'HomeController@settings');
