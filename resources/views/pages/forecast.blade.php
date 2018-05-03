@@ -1,0 +1,65 @@
+<div class="row py-2">
+    <div class="col-md-7 flex-column text-center">
+        <table class="table table-bordered table-hover text-center">
+            <thead>
+                <tr>
+                    <th scope="col">Sizes</th>
+                    <th scope="col">Likely to deliver</th>
+                    <th scope="col">Unlikely to deliver</th>
+                    <th scope="col">Unavailable</th>
+                    <th scope="col">Matched Units</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($dataForecast as $forecast)
+                    @if($forecast['matchedUnits'] > 0)
+                        <tr>
+                            <th scope='row'>{{ $data['sizes'][$loop->index] }}</th>
+                            @if($forecast['reservedUnits'] < $forecast['availableUnits'])
+                                <td>{{ $forecast['availableUnits'] }}</td>
+                                <td class="bg-success text-light">0</td>
+                                <td>{{ $forecast['unavailableUnits'] }}</td>
+                            @else
+                                @if($forecast['reservedUnits'] > $forecast['availableUnits'])
+                                    <td>{{ $forecast['availableUnits'] }}</td>
+                                    <td class="bg-danger text-light">{{ $forecast['reservedUnits'] - $forecast['availableUnits'] }}</td>
+                                    <td>{{ $forecast['unavailableUnits'] }}</td>
+                                @else
+                                    <td>{{ $forecast['availableUnits'] }}</td>
+                                    <td class="bg-success text-light">{{ $forecast['reservedUnits'] - $forecast['availableUnits'] }}</td>
+                                    <td>{{ $forecast['unavailableUnits'] }}</td>
+                                @endif
+                            @endif
+                            <td>{{ $forecast['matchedUnits'] }}</td>
+                        </tr>
+                    @else
+                        <tr>
+                            <th scope='row'>{{ $data['sizes'][$i] }}</th>
+                            <td>{{ $forecast['availableUnits'] }}</td>
+                            <td class="bg-danger text-light">0</td>
+                            <td>{{ $forecast['unavailableUnits'] }}</td>
+                            <td>{{ $forecast['matchedUnits'] }}</td>
+                        </tr>
+                    @endif
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-5 text-center">
+        @if($unavailablePos > 0)
+            <h3 class="text-center text-danger"><i class="fas fa-times-circle"></i></h3>
+            <h4 class="text-danger"> Please change the following sizes or change the number of impressions to continue:</h4>
+            <table class="mt-4 table table-bordered text-center">
+                <tr>
+                    @foreach($unavailableSizes as $auxSizes)
+                        <td>{{ $auxSizes }}</td>
+                    @endforeach
+                </tr>
+            </table>
+        @else
+            <h3 class="text-center text-success"><i class="fas fa-check-circle"></i></h3>
+            <h4 class="text-success">Your requirements are met! Please click the button to continue.</h4>
+            <button type="button" class="btn btn-success mt-2 text-center" id="continueAv">Continue!</button>
+        @endif
+    </div>
+</div>

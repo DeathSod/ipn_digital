@@ -43,4 +43,9 @@ class User extends Authenticatable
         return $this->hasOne('\App\Companies', 'CO_FK_US');
     }
 
+    public function creatives()
+    {
+        // return $this->hasMany('\App\Companies', 'CR_FK_US');
+    }
+
 }

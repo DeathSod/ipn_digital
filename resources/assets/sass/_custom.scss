@@ -343,6 +343,19 @@ body {
     border-bottom: 1px solid #e5e5e5;
 }
 
+.check-sizes {
+    transition: box-shadow 0.5s;
+    
+    &:hover {
+        box-shadow: 10px 10px 20px #888;
+    }
+
+    &:focus {
+        outline: hidden;
+    }
+    
+}
+
 .footer-info {
 	background-color: $jumbotron-bg;
 	border-style: none none solid none;

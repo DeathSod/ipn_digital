@@ -333,6 +333,22 @@ body {
   border-bottom: 1px solid #e5e5e5;
 }
 
+.check-sizes {
+  -webkit-transition: -webkit-box-shadow 0.5s;
+  transition: -webkit-box-shadow 0.5s;
+  transition: box-shadow 0.5s;
+  transition: box-shadow 0.5s, -webkit-box-shadow 0.5s;
+}
+
+.check-sizes:hover {
+  -webkit-box-shadow: 10px 10px 20px #888;
+          box-shadow: 10px 10px 20px #888;
+}
+
+.check-sizes:focus {
+  outline: hidden;
+}
+
 .footer-info {
   background-color: #e9ecef;
   border-style: none none solid none;

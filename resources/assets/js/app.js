@@ -8,6 +8,7 @@
 require('./bootstrap');
 require('./font-awesome');
 require('./buttonForms');
+require('./buyads');
 
 //window.Vue = require('vue');
 

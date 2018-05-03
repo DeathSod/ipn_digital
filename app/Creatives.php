@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Companies extends Model
+class Creatives extends Model
 {
     //
 
     protected $fillable = [
-        'CO_Name', 'CO_ContactName', 'CO_ContactLastName', 'CO_Website', 'CO_WorkArea', 'CO_FK_US', 'CO_FK_PL'
+        'CR_Name', 'CR_Filepath', 'CR_Width', 'CR_Height', 'CR_Description', 'CR_FK_US'
     ];
 
     public function user()

@@ -19,3 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/settings', 'HomeController@settings');
+Route::get('/home/portals', 'HomeController@portals');
+Route::get('/home/portals/{companies}', 'HomeController@companies');
+Route::post('/home/forecast', 'HomeController@forecast');

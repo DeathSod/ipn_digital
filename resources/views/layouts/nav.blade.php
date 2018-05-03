@@ -76,7 +76,7 @@
         </a>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item text-nowrap">
-                <a class="nav-link px-5 bg-logout" href="{{ route('logout') }}"
+                <a class="nav-link px-5 font-weight-bold bg-logout" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                     <span data-feather="power"></span>
@@ -100,7 +100,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link{{ isset($portals) ? ' active' : '' }}" href="/home/portals">
+                            <a class="nav-link{{ isset($portals_active) ? ' active' : '' }}" href="/home/portals">
                             <span data-feather="shopping-cart"></span>
                             Buy Ads
                             </a>

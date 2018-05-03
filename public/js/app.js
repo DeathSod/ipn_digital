@@ -13694,6 +13694,7 @@ module.exports = __webpack_require__(38);
 __webpack_require__(12);
 __webpack_require__(36);
 __webpack_require__(37);
+__webpack_require__(45);
 
 //window.Vue = require('vue');
 
@@ -35974,6 +35975,71 @@ if (!!buttonPerson || !!buttonCompany) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+    var checkedSizes = [];
+
+    $('.check-sizes').click(function () {
+        var btnClass = $(this).attr("class");
+        var m = btnClass.includes('check-sizes');
+        var n = btnClass.includes('btn-danger');
+        if (m && n) {
+            $(this).removeClass('btn-danger');
+            $(this).addClass('btn-success');
+            checkedSizes.push($(this).val());
+        } else {
+            for (var i = checkedSizes.length - 1; i >= 0; i--) {
+                if (checkedSizes[i] === $(this).val()) {
+                    checkedSizes.splice(i, 1);
+                    $(this).removeClass('btn-success');
+                    $(this).addClass('btn-danger');
+                    break;
+                }
+            }
+        }
+    });
+
+    $('#checkAv').click(function () {
+
+        var start = $("#inputCampaignDateStart").val();
+        var end = $("#inputCampaignDateEnd").val();
+        var cpm = $("#inputCpm").val();
+        var impLvl = $("#inputImportanceLevel").val();
+
+        if (checkedSizes.length == 0 || cpm.length == 0 || start.length == 0 || end.length == 0) {
+            $("#av-div").html("<h1 class='text-center'>The availability of your ads will appear here.</h1>");
+            return;
+        } else {
+            $("#av-div").html("<h1 class='text-center'>The availability of your ads will appear here.</h1>");
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: "POST",
+                url: "/home/forecast",
+                data: { sizes: checkedSizes, start: start, end: end, cpm: cpm, impLvl: impLvl },
+                success: function success(response) {
+                    $("#av-div").html(response);
+                },
+                error: function error() {
+                    $("#av-div").html('Something went wrong with the request, Try again later.');
+                }
+            });
+        }
+    });
+
+    $('#continueAv').click(function () {});
+});
 
 /***/ })
 /******/ ]);
