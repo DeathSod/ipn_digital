@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Companies;
 use App\Places;
 use App\User;
+use App\Mail\Welcome;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\MassAssignmentException;
@@ -77,7 +78,7 @@ class CompaniesController extends Controller
             $user = User::create([
                 'email' => request('email'),
                 'password' => bcrypt(request('password')),
-                'US_isCompany' => 0
+                'US_isCompany' => 1
             ]);
 
             $company = Companies::create([
@@ -89,6 +90,8 @@ class CompaniesController extends Controller
                 'CO_FK_US' => $user->id,
                 'CO_FK_PL' => Places::where('PL_Name', request('country'))->first()->PL_id
             ]);
+
+            \Mail::to($user)->send(new Welcome($user));
 
             DB::commit();
 

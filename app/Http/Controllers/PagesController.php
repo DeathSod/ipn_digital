@@ -20,11 +20,11 @@ class PagesController extends Controller
             $user = User::find($user_id);
             if($user->companies)
             {
-                return view('home')->with(['companies' => $user->companies, 'home' => 'active']);
+                return view('home')->with(['user' => $user, 'companies' => $user->companies, 'home' => 'active']);
             }
             elseif($user->people)
             {
-                return view('home')->with(['people' => $user->people, 'home' => 'active']);
+                return view('home')->with(['user' => $user, 'people' => $user->people, 'home' => 'active']);
             }
         }
         else{

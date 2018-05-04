@@ -70,11 +70,11 @@ class HomeController extends Controller
         $user = User::find($user_id);
         if($user->companies)
         {
-            return view('home')->with(['companies' => $user->companies, 'home' => 'active']);
+            return view('home')->with(['user' => $user, 'companies' => $user->companies, 'home' => 'active']);
         }
         elseif($user->people)
         {
-            return view('home')->with(['people' => $user->people, 'home' => 'active']);
+            return view('home')->with(['user' => $user, 'people' => $user->people, 'home' => 'active']);
         }
     }
 
@@ -84,11 +84,11 @@ class HomeController extends Controller
         $user = User::find($user_id);
         if($user->companies)
         {
-            return view('pages.settings')->with(['companies' => $user->companies, 'settings' => 'active']);
+            return view('pages.settings')->with(['user' => $user, 'companies' => $user->companies, 'settings' => 'active']);
         }
         elseif($user->people)
         {
-            return view('pages.settings')->with(['people' => $user->people, 'settings' => 'active']);
+            return view('pages.settings')->with(['user' => $user, 'people' => $user->people, 'settings' => 'active']);
         }
         
     }
@@ -100,11 +100,11 @@ class HomeController extends Controller
         $portals = Companies::all();
         if($user->companies)
         {
-            return view('pages.portals')->with(['companies' => $user->companies, 'portals' => $portals, 'portals_active' => 'active']);
+            return view('pages.portals')->with(['user' => $user, 'companies' => $user->companies, 'portals' => $portals, 'portals_active' => 'active']);
         }
         elseif($user->people)
         {
-            return view('pages.portals')->with(['people' => $user->people, 'portals' => $portals, 'portals_active' => 'active']);
+            return view('pages.portals')->with(['user' => $user, 'people' => $user->people, 'portals' => $portals, 'portals_active' => 'active']);
         }
     }
 
@@ -155,16 +155,16 @@ class HomeController extends Controller
                     }
                     $statementBuilder->increaseOffsetBy($pageSize);
                 } while ($statementBuilder->getOffset() < $totalResultSetSize);
-                return view('pages.buyads')->with(['company' => $company, 'adSizes' => $adSizes, 'portals_active' => 'active']);
+                return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'adSizes' => $adSizes, 'portals_active' => 'active']);
             }
             else
             {
-                return view('pages.buyads')->with(['company' => $company, 'message' => 'This company has no associated ads to sell. Try with another one.', 'portals_active' => 'active']);
+                return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'message' => 'This company has no associated ads to sell. Try with another one.', 'portals_active' => 'active']);
             }
         }
         catch(\Exception $e)
         {
-            return view('pages.buyads')->with(['company' => $company, 'message' => 'There was an error connecting to DFP. Go back and try again.', 'portals_active' => 'active']);
+            return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'message' => 'There was an error connecting to DFP. Go back and try again.', 'portals_active' => 'active']);
         }
     }
 

@@ -3,10 +3,10 @@
         <table class="table table-bordered table-hover text-center">
             <thead>
                 <tr>
-                    <th scope="col">Sizes</th>
+                    <th scope="col" class="align-middle">Sizes</th>
                     <th scope="col">Likely to deliver</th>
                     <th scope="col">Unlikely to deliver</th>
-                    <th scope="col">Unavailable</th>
+                    <th scope="col" class="align-middle">Unavailable</th>
                     <th scope="col">Matched Units</th>
                 </tr>
             </thead>
@@ -34,7 +34,7 @@
                         </tr>
                     @else
                         <tr>
-                            <th scope='row'>{{ $data['sizes'][$i] }}</th>
+                            <th scope='row'>{{ $data['sizes'][$loop->index] }}</th>
                             <td>{{ $forecast['availableUnits'] }}</td>
                             <td class="bg-danger text-light">0</td>
                             <td>{{ $forecast['unavailableUnits'] }}</td>

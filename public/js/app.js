@@ -13677,7 +13677,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(11);
-module.exports = __webpack_require__(38);
+module.exports = __webpack_require__(39);
 
 
 /***/ }),
@@ -13694,7 +13694,7 @@ module.exports = __webpack_require__(38);
 __webpack_require__(12);
 __webpack_require__(36);
 __webpack_require__(37);
-__webpack_require__(45);
+__webpack_require__(38);
 
 //window.Vue = require('vue');
 
@@ -35974,18 +35974,6 @@ if (!!buttonPerson || !!buttonCompany) {
 /* 38 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */
-/***/ (function(module, exports) {
-
 $(document).ready(function () {
     var checkedSizes = [];
 
@@ -36020,7 +36008,7 @@ $(document).ready(function () {
             $("#av-div").html("<h1 class='text-center'>The availability of your ads will appear here.</h1>");
             return;
         } else {
-            $("#av-div").html("<h1 class='text-center'>The availability of your ads will appear here.</h1>");
+            $("#av-div").html("<div class='loader'></div>");
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -36032,7 +36020,7 @@ $(document).ready(function () {
                     $("#av-div").html(response);
                 },
                 error: function error() {
-                    $("#av-div").html('Something went wrong with the request, Try again later.');
+                    $("#av-div").html('<h1 class="text-center">Something went wrong with the request, Try again later.</h1>');
                 }
             });
         }
@@ -36040,6 +36028,12 @@ $(document).ready(function () {
 
     $('#continueAv').click(function () {});
 });
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

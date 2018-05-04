@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\People;
 use App\Places;
 use App\User;
+use App\Mail\Welcome;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\MassAssignmentException;
@@ -43,8 +44,7 @@ class PeopleController extends Controller
             'country' => request('country'),
             'email' => request('email')
         ];
-
-        dd($data);
+        
         DB::beginTransaction();
         try
         {
@@ -70,6 +70,8 @@ class PeopleController extends Controller
                 'PE_FK_US' => $user->id,
                 'PE_FK_PL' => Places::where('PL_Name', request('country'))->first()->PL_id
             ]);
+
+            \Mail::to($user)->send(new Welcome($user));
 
             DB::commit();
 

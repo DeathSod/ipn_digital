@@ -40,7 +40,7 @@ $(document).ready(function()
             return;
         }
         else {
-            $("#av-div").html("<h1 class='text-center'>The availability of your ads will appear here.</h1>");
+            $("#av-div").html("<div class='loader'></div>");
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -53,7 +53,7 @@ $(document).ready(function()
                 },
                 error: function()
                 {
-                    $("#av-div").html('Something went wrong with the request, Try again later.');
+                    $("#av-div").html('<h1 class="text-center">Something went wrong with the request, Try again later.</h1>');
                 }
             });
         

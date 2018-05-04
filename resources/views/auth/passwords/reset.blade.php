@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
+@section('title')
+    <title>{{config('app.name', 'IPN Digital')}} | Reset Password</title>
+@endsection
+
+@section('navbar')
+    @include('../layouts/nav')
+@endsection
+
 @section('content')
-<div class="container">
+<div class="container reset pt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

@@ -74,7 +74,8 @@
                 Dashboard
             @endif
         </a>
-        <ul class="navbar-nav ml-auto">
+        <p class="text-center text-light  my-0 mx-auto"> Balance: {{ $user->US_Credits }}$ </p>
+        <ul class="navbar-nav">
             <li class="nav-item text-nowrap">
                 <a class="nav-link px-5 font-weight-bold bg-logout" href="{{ route('logout') }}"
                 onclick="event.preventDefault();

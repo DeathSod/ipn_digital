@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    <title>{{config('app.name', 'IPN Digital')}} | Reset Password</title>
+@endsection
+
 @section('navbar')
     @include('../layouts/nav')
 @endsection
