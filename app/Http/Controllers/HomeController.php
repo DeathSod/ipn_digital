@@ -78,21 +78,6 @@ class HomeController extends Controller
         }
     }
 
-    public function settings()
-    {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        if($user->companies)
-        {
-            return view('pages.settings')->with(['user' => $user, 'companies' => $user->companies, 'settings' => 'active']);
-        }
-        elseif($user->people)
-        {
-            return view('pages.settings')->with(['user' => $user, 'people' => $user->people, 'settings' => 'active']);
-        }
-        
-    }
-
     public function portals()
     {
         $user_id = auth()->user()->id;
@@ -113,7 +98,7 @@ class HomeController extends Controller
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $company = Companies::where('CO_id', $id)->first();
-        
+
         try
         {
             if($company->CO_Name == 'IPN Digital C.A.'){
@@ -127,10 +112,10 @@ class HomeController extends Controller
                                 ->build();
 
                 $dfpServices = new DfpServices();
-                
+
                 $inventoryService = $dfpServices->get($session, InventoryService::class);
                 $pageSize = StatementBuilder::SUGGESTED_PAGE_LIMIT;
-                $statementBuilder = (new StatementBuilder())->where('name = \'prueba_tesis\' OR name = \'prueba_300x250\'')->orderBy('status ASC')->limit($pageSize);
+                $statementBuilder = (new StatementBuilder())/*->where('name = \'prueba_tesis\' OR name = \'prueba_300x250\'')*/->orderBy('status ASC')->limit($pageSize);
                 // Retrieve a small amount of ad units at a time, paging
                 // through until all ad units have been retrieved.
                 $totalResultSetSize = 0;
@@ -155,16 +140,37 @@ class HomeController extends Controller
                     }
                     $statementBuilder->increaseOffsetBy($pageSize);
                 } while ($statementBuilder->getOffset() < $totalResultSetSize);
-                return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'adSizes' => $adSizes, 'portals_active' => 'active']);
+                if($user->companies)
+                {
+                    return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'companies' => $user->companies, 'adSizes' => $adSizes, 'portals_active' => 'active']);
+                }
+                elseif($user->people)
+                {
+                    return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'people' => $user->people, 'adSizes' => $adSizes, 'portals_active' => 'active']);
+                }
             }
             else
             {
-                return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'message' => 'This company has no associated ads to sell. Try with another one.', 'portals_active' => 'active']);
+                if($user->companies)
+                {
+                    return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'companies' => $user->companies, 'message' => 'This company has no associated ads to sell. Try with another one.', 'portals_active' => 'active']);
+                }
+                elseif($user->people)
+                {
+                    return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'people' => $user->people, 'message' => 'This company has no associated ads to sell. Try with another one.', 'portals_active' => 'active']);
+                }
             }
         }
         catch(\Exception $e)
         {
-            return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'message' => 'There was an error connecting to DFP. Go back and try again.', 'portals_active' => 'active']);
+            if($user->companies)
+            {
+                return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'companies' => $user->companies, 'message' => 'There was an error connecting to DFP. Go back and try again.', 'portals_active' => 'active']);
+            }
+            elseif($user->people)
+            {
+                return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'people' => $user->people, 'message' => 'There was an error connecting to DFP. Go back and try again.', 'portals_active' => 'active']);
+            }
         }
     }
 
@@ -182,6 +188,9 @@ class HomeController extends Controller
             'cpm' => request('cpm'),
             'importance' => request('impLvl')
         ];
+
+        $today = new DateTime();
+        $today->setTime(0, 0, 0);
 
         $dataForecast = [];
 
@@ -220,10 +229,25 @@ class HomeController extends Controller
                 }
 
                 $auxLineItem->setCreativeRotationType(CreativeRotationType::OPTIMIZED);
-                $auxLineItem->setStartDateTimeType(StartDateTimeType::IMMEDIATELY);
+                $auxLineItem->setStartDateTime(DfpDateTimes::fromDateTime(new DateTime($data['startDate'], new DateTimeZone('America/New_York'))));
+
+                $match_date = new DateTime($data['startDate'], new DateTimeZone('America/New_York'));
+                $match_date->setTime(0, 0, 0);
+                $diff = $today->diff($match_date);
+                $diffDays = (integer)$diff->format("%R%a");
+
+                if($diffDays == 0)
+                {
+                    $auxLineItem->setStartDateTimeType(StartDateTimeType::IMMEDIATELY);
+                }
+                elseif($diffDays > 0)
+                {
+                    $auxLineItem->setStartDateTimeType(StartDateTimeType::USE_START_DATE_TIME);
+                }
+
                 $auxLineItem->setEndDateTime(
                     DfpDateTimes::fromDateTime(
-                        new DateTime('+30 days', new DateTimeZone('America/New_York'))
+                        new DateTime($data['endDate'], new DateTimeZone('America/New_York'))
                     )
                 );
                 $auxLineItem->setCostType(CostType::CPM);
@@ -306,12 +330,27 @@ class HomeController extends Controller
                 $i++;
 
             }
-            
+
             return view('pages.forecast')->with(['data' => $data, 'dataForecast' => $dataForecast, 'unavailableSizes' => $unavailableSizes, 'unavailablePos' => $unavailablePos]);
         }
         catch(\Exception $e)
         {
             return view('pages.forecast')->with(['connect' => 'There was a problem fetching the data, try again.']);
         }
+    }
+
+    public function settings()
+    {
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        if($user->companies)
+        {
+            return view('pages.settings')->with(['user' => $user, 'companies' => $user->companies, 'settings' => 'active']);
+        }
+        elseif($user->people)
+        {
+            return view('pages.settings')->with(['user' => $user, 'people' => $user->people, 'settings' => 'active']);
+        }
+
     }
 }

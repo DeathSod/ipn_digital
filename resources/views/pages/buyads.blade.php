@@ -61,7 +61,7 @@
             <h1 class="text-center">The availability of your ads will appear here.</h1>
         </div>
         {{-- This should be dynamic with the sizes --}}
-        <div id="buy-div" class="pb-3 border-bottom">
+        <div id="buy-div" class="pb-3 border-bottom d-none">
             <div class="w-100 text-center pt-4 mb-4">
                 <h3>Step 4: Upload your creatives</h3>
             </div>

@@ -113,9 +113,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link{{ isset($purchases) ? ' active' : '' }}" href="/home/purchases">
+                            <a class="nav-link{{ isset($history) ? ' active' : '' }}" href="/home/payments">
                             <span data-feather="bar-chart-2"></span>
-                            Purchase History
+                            Payments History
                             </a>
                         </li>
                         <li class="nav-item">
