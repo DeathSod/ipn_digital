@@ -16,4 +16,9 @@ class Companies extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function places()
+    {
+        return $this->belongsTo('App\Places');
+    }
 }

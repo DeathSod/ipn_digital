@@ -44,6 +44,9 @@
                 @endforeach
             </tbody>
         </table>
+        {{-- @foreach($location as $loc)
+            <p> {{var_dump($loc)}} </p>
+        @endforeach --}}
     </div>
     <div class="col-md-5 text-center">
         @if($unavailablePos > 0)
@@ -65,3 +68,15 @@
         @endif
     </div>
 </div>
+<script>
+    var continueButton = document.getElementById('continueAv');
+
+    continueButton.onclick = function()
+    {
+        var buyDiv = document.getElementById('buy-div');
+        var settingsDiv = document.getElementById('settings-div');
+
+        buyDiv.classList.remove('d-none');
+        settingsDiv.classList.add('d-none');
+    }
+</script>

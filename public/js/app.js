@@ -35985,12 +35985,19 @@ $(document).ready(function () {
             $(this).removeClass('btn-danger');
             $(this).addClass('btn-success');
             checkedSizes.push($(this).val());
+            $('<input>').attr({
+                type: 'hidden',
+                id: $(this).val(),
+                value: $(this).val(),
+                name: 'sizes[]'
+            }).appendTo('#stepOne');
         } else {
-            for (var i = checkedSizes.length - 1; i >= 0; i--) {
-                if (checkedSizes[i] === $(this).val()) {
-                    checkedSizes.splice(i, 1);
+            for (var _i = checkedSizes.length - 1; _i >= 0; _i--) {
+                if (checkedSizes[_i] === $(this).val()) {
+                    checkedSizes.splice(_i, 1);
                     $(this).removeClass('btn-success');
                     $(this).addClass('btn-danger');
+                    $('#' + $(this).val()).remove();
                     break;
                 }
             }
@@ -36003,6 +36010,12 @@ $(document).ready(function () {
         var end = $("#inputCampaignDateEnd").val();
         var cpm = $("#inputCpm").val();
         var impLvl = $("#inputImportanceLevel").val();
+        var countriesInput = $('select[name="country[]"]');
+        var countries = [];
+
+        for (i = 0; i < countriesInput.length; i++) {
+            countries.push(countriesInput.eq(i).val());
+        }
 
         if (checkedSizes.length == 0 || cpm.length == 0 || start.length == 0 || end.length == 0) {
             $("#av-div").html("<h1 class='text-center'>The availability of your ads will appear here.</h1>");
@@ -36015,18 +36028,21 @@ $(document).ready(function () {
                 },
                 type: "POST",
                 url: "/home/forecast",
-                data: { sizes: checkedSizes, start: start, end: end, cpm: cpm, impLvl: impLvl },
+                data: { sizes: checkedSizes, start: start, end: end, cpm: cpm, impLvl: impLvl, countries: countries },
                 success: function success(response) {
                     $("#av-div").html(response);
                 },
-                error: function error() {
+                error: function error(response) {
                     $("#av-div").html('<h1 class="text-center">Something went wrong with the request, Try again later.</h1>');
                 }
             });
         }
     });
 
-    $('#continueAv').click(function () {});
+    $('#continueAv').click(function () {
+        console.log("Hola");
+        $('#buy-div').removeClass('d-none');
+    });
 });
 
 /***/ }),

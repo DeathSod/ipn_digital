@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\User;
 use App\People;
 use App\Companies;
+use App\Places;
 use DateTime;
 use DateTimeZone;
 
@@ -35,6 +37,11 @@ use Google\AdsApi\Dfp\v201802\AvailabilityForecastOptions;
 use Google\AdsApi\Dfp\v201802\PlacementService;
 use Google\AdsApi\Dfp\v201802\LineItemService;
 use Google\AdsApi\Dfp\v201802\InventoryService;
+use Google\AdsApi\Dfp\v201802\Location;
+use Google\AdsApi\Dfp\v201802\GeoTargeting;
+use Google\AdsApi\Dfp\v201802\PublisherQueryLanguageService;
+use Google\AdsApi\Dfp\v201802\Statement;
+use Google\AdsApi\AdWords\v201802\mcm\CustomerService;
 
 class HomeController extends Controller
 {
@@ -97,6 +104,7 @@ class HomeController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
+        $places = Places::all();
         $company = Companies::where('CO_id', $id)->first();
 
         try
@@ -142,11 +150,11 @@ class HomeController extends Controller
                 } while ($statementBuilder->getOffset() < $totalResultSetSize);
                 if($user->companies)
                 {
-                    return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'companies' => $user->companies, 'adSizes' => $adSizes, 'portals_active' => 'active']);
+                    return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'companies' => $user->companies, 'adSizes' => $adSizes, 'portals_active' => 'active', 'places' => $places]);
                 }
                 elseif($user->people)
                 {
-                    return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'people' => $user->people, 'adSizes' => $adSizes, 'portals_active' => 'active']);
+                    return view('pages.buyads')->with(['user' => $user, 'company' => $company, 'people' => $user->people, 'adSizes' => $adSizes, 'portals_active' => 'active', 'places' => $places]);
                 }
             }
             else
@@ -186,8 +194,26 @@ class HomeController extends Controller
             'startDate' => request('start'),
             'endDate' => request('end'),
             'cpm' => request('cpm'),
-            'importance' => request('impLvl')
+            'importance' => request('impLvl'),
+            'countries' => request('countries')
         ];
+
+        // $geoTargeting = new GeoTargeting();
+
+        // $dataPlaces = array();
+
+        // for($i = 0; $i < count($data['countries']); $i++)
+        // {
+        //     $places = DB::table('places')->where('PL_id', $data['countries'][$i])->first();
+        //     $location = new Location();
+        //     $location->setType("COUNTRY");
+        //     $location->setDisplayName("$places->PL_Name");
+        //     array_push($dataPlaces, $location);
+        // }
+
+        // $arrayLocation = array($dataPlaces);
+
+        // $geoTargeting->setTargetedLocations($arrayLocation);
 
         $today = new DateTime();
         $today->setTime(0, 0, 0);
@@ -276,6 +302,7 @@ class HomeController extends Controller
                 $inventoryTargeting->setTargetedAdUnits([$adUnitTargeting]);
                 $targeting = new Targeting();
                 $targeting->setInventoryTargeting($inventoryTargeting);
+                // $targeting->setGeoTargeting($geoTargeting);
                 $auxLineItem->setTargeting($targeting);
 
                 $prospectiveLineItem = new ProspectiveLineItem();
